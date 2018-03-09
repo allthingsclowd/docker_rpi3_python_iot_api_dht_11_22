@@ -1,3 +1,6 @@
+# WARNING - NEEDS DEBUGGING - WIP !!!!!!!
+
+
 # Raspberry Pi 3 IoT Demo using Docker &amp; Python 2.7 to read a DHT11 or DHT22 Temperature and Humidity Sensor using a RESTful API
 
 The Dockerfile in this repo can be used to build an IoT demo container that runs a Python 2.7 application that will work with the GPIO pins configured to match the following setup :
