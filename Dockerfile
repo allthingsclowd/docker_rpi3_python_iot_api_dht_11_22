@@ -1,8 +1,7 @@
 FROM arm32v7/python:2.7.14-stretch
 
 RUN apt-get update && \
-apt-get install -y git python-flask build-essential python-dev && \
-pip install RPi.GPIO && \
+apt-get install -y git python-flask && \
 pip install flask && \
 git clone https://github.com/adafruit/Adafruit_Python_DHT.git
 
