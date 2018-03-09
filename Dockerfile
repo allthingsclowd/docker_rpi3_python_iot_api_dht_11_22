@@ -10,7 +10,7 @@ WORKDIR Adafruit_Python_DHT
 RUN python setup.py install && \
 git clone https://github.com/allthingsclowd/docker_rpi3_python_iot_api_dht_11_22.git
 
-WORKDIR /docker_rpi3_python_iot_api_dht_11_22
+WORKDIR docker_rpi3_python_iot_api_dht_11_22
 
 EXPOSE 8989
 
