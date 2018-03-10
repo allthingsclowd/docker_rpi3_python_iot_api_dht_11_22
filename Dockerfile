@@ -3,6 +3,7 @@ FROM arm32v7/python:2.7.14-stretch
 RUN apt-get update && \
 apt-get install -y git python-flask && \
 pip install flask && \
+pip install RPi.GPIO && \
 git clone https://github.com/allthingsclowd/DHT11_Python.git
 
 WORKDIR DHT11_Python
