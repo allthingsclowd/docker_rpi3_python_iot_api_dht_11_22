@@ -1,6 +1,3 @@
-# WARNING - NEEDS DEBUGGING - WIP !!!!!!!
-
-
 # Raspberry Pi 3 IoT Demo using Docker &amp; Python 2.7 to read a DHT11 or DHT22 Temperature and Humidity Sensor using a RESTful API
 
 The Dockerfile in this repo can be used to build an IoT demo container that runs a Python 2.7 application that will work with the GPIO pins configured to match the following setup :
@@ -23,22 +20,22 @@ docker container run -d -p 4321:8989 --name my-python-iot-demo --device /dev/gpi
 # Verification
 ## Using curl
 ```bash
-curl http://raspberry-pi-ip-address:4321/   <-- Returns the status of the LED
+curl http://raspberry-pi-ip-address:4321/   <-- Returns both the temperature and the humidity readings in JSON format
 						  
-curl http://raspberry-pi-ip-address:4321/17/on   <-- Turns on the LED attached to GPIO17 and Returns a json status response
+curl http://raspberry-pi-ip-address:4321/temperature   <-- Returns a JSON temperature response
 						       
-curl http://raspberry-pi-ip-address:4321/17/off   <-- Turns off the LED attached to GPIO17 and Returns a json status response
+curl http://raspberry-pi-ip-address:4321/humidity   <-- Returns a JSON humidity response
 ```
 							
 							
 ## Using a browser
 Navigate to :
 ```bash
-http://raspberry-pi-ip-address:4321/   <-- Returns the status of the LED
+http://raspberry-pi-ip-address:4321/   <-- Returns both the temperature and the humidity readings in JSON format
 					     
-http://raspberry-pi-ip-address:4321/17/on   <-- Turns on the LED attached to GPIO17 and Returns a json status response
+http://raspberry-pi-ip-address:4321/17/on   <-- Returns a JSON temperature response
 						  
-http://raspberry-pi-ip-address:4321/17/off   <-- Turns off the LED attached to GPIO17 and Returns a json status response
+http://raspberry-pi-ip-address:4321/17/off   <-- Returns a JSON humidity response
 ```
 
 
