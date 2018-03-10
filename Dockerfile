@@ -7,7 +7,7 @@ git clone https://github.com/allthingsclowd/DHT11_Python.git
 
 WORKDIR DHT11_Python
 
-RUN git clone https://github.com/allthingsclowd/docker_rpi3_python_iot_api_dht_11_22.git .
+RUN rm -rf .git && git clone https://github.com/allthingsclowd/docker_rpi3_python_iot_api_dht_11_22.git .
 
 EXPOSE 8989
 
