@@ -19,15 +19,15 @@ instance = dht11.DHT11(pin=17)
 def main():
 
   result = instance.read()
-  
+
   if result.is_valid():
     templateData = {
         'humidity' : result.humidity,
         'temperature' : result.temperature
-     }
+    }
   else:
     templateData = { 'empty' }
-  
+
   # Pass the template data into the template main.html and return it to the user
   return Response(json.dumps(templateData), mimetype='application/json')
 
@@ -36,22 +36,20 @@ def main():
 def action(action):
    # If the action part of the URL is "temperature," execute the code indented below:
 
-   result = instance.read()
-   
-    if result.is_valid():
-     if action == "temperature":
-        action_result = result.temperature
-     if action == "humidity":
-        action_result = result.humidity
-    else:
-      action_result = 'empty'
+  result = instance.read()
+  action_result = 'empty'
+  if result.is_valid():
+    if action == "temperature":
+      action_result = result.temperature
+    if action == "humidity":
+      action_result = result.humidity
 
    # Along with the pin dictionary, put the message into the template data dictionary:
-   templateData = {
-      action : action_result
-   }
+  templateData = {
+    action : action_result
+  }
 
-   return Response(json.dumps(templateData), mimetype='application/json')
+  return Response(json.dumps(templateData), mimetype='application/json')
 
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port=8989, debug=True)
+  app.run(host='0.0.0.0', port=8989, debug=True)
