@@ -5,7 +5,7 @@ The Dockerfile in this repo can be used to build an IoT demo container that runs
 ![rpi3-dht11-dht22_schem](https://user-images.githubusercontent.com/9472095/37230255-afadce42-23de-11e8-841a-7d16a8be0285.jpg)
 
 
-The docker image can be found here: 
+The docker image can be found here: https://hub.docker.com/r/allthingscloud/rpi3-python-iot-api-dht/
 
 
 To build the dockerfile on a raspberry pi 3 after cloning this repository: 
