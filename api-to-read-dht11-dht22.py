@@ -1,29 +1,32 @@
+import RPi.GPIO as GPIO
+import dht11
+import time
+import datetime
 import json
-# import RPi.GPIO as GPIO
-import Adafruit_DHT
 from flask import Flask, request, Response
+
 app = Flask(__name__)
 
-# GPIO.setmode(GPIO.BCM)
+# initialize GPIO
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.cleanup()
 
-# Sensor should be set to Adafruit_DHT.DHT11,
-# Adafruit_DHT.DHT22, or Adafruit_DHT.AM2302.
-sensor = Adafruit_DHT.DHT11
-
-# Example using a Raspberry Pi 3 with DHT11 sensor
-# connected to GPIO17.
-pin = 17
+# read data using pin 17
+instance = dht11.DHT11(pin=17)
 
 @app.route("/")
 def main():
-  # Try to grab a sensor reading.  Use the read_retry method which will retry up
-  # to 15 times to get a sensor reading (waiting 2 seconds between each retry).
-  humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+
+  result = instance.read()
   
-  templateData = {
-      'humidity' : humidity,
-      'temperature' : temperature
-   }
+  if result.is_valid():
+    templateData = {
+        'humidity' : result.humidity,
+        'temperature' : result.temperature
+     }
+  else:
+    templateData = { 'empty' }
   
   # Pass the template data into the template main.html and return it to the user
   return Response(json.dumps(templateData), mimetype='application/json')
@@ -32,14 +35,16 @@ def main():
 @app.route("/<action>")
 def action(action):
    # If the action part of the URL is "temperature," execute the code indented below:
-   # Try to grab a sensor reading.  Use the read_retry method which will retry up
-   # to 15 times to get a sensor reading (waiting 2 seconds between each retry).
-   humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+
+   result = instance.read()
    
-   if action == "temperature":
-      action_result = temperature
-   if action == "humidity":
-      action_result = humidity
+    if result.is_valid():
+     if action == "temperature":
+        action_result = result.temperature
+     if action == "humidity":
+        action_result = result.humidity
+    else:
+      action_result = 'empty'
 
    # Along with the pin dictionary, put the message into the template data dictionary:
    templateData = {
